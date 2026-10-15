@@ -1,6 +1,6 @@
 # Q Route
 
-> A privacy-aware ride-safety system that detects suspicious route deviations and starts a passenger-safety verification workflow.
+> A privacy-aware ride-safety system that detects suspicious route deviations and starts a passenger safety verification workflow.
 
 [![Status: Independent Open-Source Project](https://img.shields.io/badge/status-independent%20open--source%20project-blue.svg)](#project-status)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
@@ -8,9 +8,9 @@
 
 ## Overview
 
-Q Route is an independent open-source project designed to explore a practical safety layer for ride-hailing and campus-transport systems.
+Q Route is an independent open-source project exploring a practical safety layer for ride-hailing and campus-transport systems.
 
-The system compares a ride's movement with its expected route. If it detects a sustained or suspicious deviation, it starts a safety-verification workflow that allows the passenger to confirm whether they are safe or request help.
+The system compares a ride's movement with its expected route. If it detects a sustained or otherwise suspicious deviation, it starts a safety verification workflow that lets the passenger confirm that they are safe or request help.
 
 Q Route is an early-stage project. Its implementation and technical design may evolve through open-source discussion, experimentation, testing, and community contribution.
 
@@ -21,13 +21,13 @@ Ride-hailing passengers may face situations in which:
 - A vehicle takes an unexpected route.
 - A vehicle stops for an unusual period.
 - The passenger cannot manually open the safety feature.
-- Trusted contacts receive information too late.
+- Trusted contacts may receive information too late.
 - A route change is noticed only after the situation has become serious.
 - Existing safety features depend mainly on the passenger identifying danger and taking action.
 
 A route deviation does not automatically mean that a passenger is in danger. Traffic, road closures, navigation errors, and one-way roads can all cause legitimate route changes.
 
-The challenge is to detect unusual ride behaviour early without creating excessive false alarms.
+The challenge is to detect unusual ride behavior early without creating excessive false alarms.
 
 ## Proposed solution
 
@@ -38,8 +38,8 @@ Q Route explores a safety workflow that:
 3. Compares movement with a configurable route corridor.
 4. Detects sustained or suspicious deviations.
 5. Asks the passenger to confirm whether they are safe.
-6. Notifies a trusted contact when help is requested or confirmation is not received.
-7. Provides a manual path for contacting emergency services.
+6. Notifies a trusted contact when help is requested or the passenger does not respond.
+7. Shows the passenger how to contact emergency services manually.
 8. Records an incident timeline for testing and review.
 
 The system is intended to assist passengers and trusted contacts. It is not intended to replace emergency services, professional dispatch systems, or official police infrastructure.
@@ -92,7 +92,7 @@ Implementation details may vary between deployments and contributors.
 
 ## Out of scope
 
-The following are outside the guaranteed scope of this project:
+The following are not promised by this project:
 
 - Direct automatic police-station notification.
 - Guaranteed emergency response.
@@ -122,7 +122,7 @@ Q Route is developed around these principles:
 
 GPS data can be inaccurate near buildings, bridges, tunnels, or areas with poor signal. A different route may also be legitimate because of traffic, road closures, or road restrictions.
 
-Q Route should use a configurable route corridor, a grace period, and route re-evaluation instead of treating every GPS difference as suspicious.
+Q Route should use a configurable route corridor, a grace period, and route re-evaluation instead of treating every GPS difference as a suspicious deviation.
 
 ### False alarms
 
@@ -198,7 +198,7 @@ No feature should be considered production-ready unless it has been implemented,
 
 ## Getting started
 
-The project is currently in the design and development stage. Setup instructions will be added alongside the relevant implementation.
+Because the project is still in the design and development stage, setup instructions will be added alongside the relevant implementation.
 
 When contributing code, document:
 
