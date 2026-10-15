@@ -1,0 +1,1107 @@
+{
+  "fixture_id": "q-route-synthetic-route-deviation-scenarios",
+  "fixture_version": "1.0.0",
+  "dataset_type": "synthetic",
+  "issue_reference": {
+    "repository": "thesivarohith/Q-route",
+    "issue_number": 3,
+    "issue_title": "Design simulated ride scenarios for route-deviation testing"
+  },
+  "synthetic_data_notice": "SYNTHETIC DATA ONLY. Every coordinate, timestamp, ride identifier and street name in this fixture is fictional and machine-generated for testing. No real passenger, driver, home, college or live-location information is included or derivable. Coordinates are deliberately placed in the 'Null Island Grid' open-ocean test zone (latitude 0.0000-0.0500, longitude 0.0000-0.0500) so that they cannot correspond to any real road or building.",
+  "coordinate_system": "WGS84 (EPSG:4326), decimal degrees",
+  "synthetic_test_zone": {
+    "name": "Null Island Grid (synthetic)",
+    "latitude_min": 0.0,
+    "latitude_max": 0.05,
+    "longitude_min": 0.0,
+    "longitude_max": 0.05
+  },
+  "field_naming_note": "The base commit contains documentation only and no source code or schema, so there are no programmatic field names to match. Field names use snake_case JSON keys derived from the project's documented vocabulary in README.md and PRIVACY.md: expected route, route corridor, grace period, route re-evaluation, safety verification request, trusted contact, incident timeline, last-known-location, delayed synchronisation, consent.",
+  "implementation_status_notice": "These outcomes describe the behaviour Q Route's design documentation calls for. The repository currently contains documentation only: no route-deviation detection algorithm, no test harness and no threshold configuration exist on the base commit. Nothing in this fixture has been verified against a running implementation, and no outcome here should be read as production-verified behaviour.",
+  "expected_outcome_status_vocabulary": {
+    "expected_behavior_not_implemented": "The outcome is what the design documentation leads us to expect. It has NOT been verified against any running implementation, because no detection implementation exists in the repository on the base commit."
+  },
+  "scenario_count": 5,
+  "scenarios": [
+    {
+      "scenario_id": "QRS-001",
+      "scenario_name": "Normal ride following the expected route",
+      "scenario_type": "normal_route",
+      "synthetic": true,
+      "synthetic_ride_id": "SYN-RIDE-001",
+      "description": "A synthetic ride that follows expected route R-1 from pickup to destination with only minor position jitter well inside the route corridor. Baseline case for the route-deviation workflow.",
+      "expected_route": {
+        "description": "Expected route R-1 (fictional, synthetic grid): straight synthetic road segment from the synthetic pickup point (0.0100, 0.0100) due east along 'Synthetic Avenue A' through fictional junction Alpha (0.0100, 0.0180) and fictional junction Beta (0.0100, 0.0280) to the synthetic destination point (0.0100, 0.0300). Total expected-route length is about 2.23 km. The road names, junctions, pickup point and destination are invented for this fixture and do not exist.",
+        "waypoints": [
+          {
+            "latitude": 0.01,
+            "longitude": 0.01,
+            "label": "synthetic pickup point (Grid Square 1)"
+          },
+          {
+            "latitude": 0.01,
+            "longitude": 0.018,
+            "label": "fictional junction Alpha"
+          },
+          {
+            "latitude": 0.01,
+            "longitude": 0.028,
+            "label": "fictional junction Beta"
+          },
+          {
+            "latitude": 0.01,
+            "longitude": 0.03,
+            "label": "synthetic destination point (Grid Square 9)"
+          }
+        ]
+      },
+      "scenario_parameters": {
+        "route_corridor_m": 50.0,
+        "grace_period_s": 120,
+        "_parameter_notice": "Illustrative fixture-side test parameters only. README.md describes a configurable route corridor and grace period but the repository implements no detector and no threshold configuration; these values must not be read as implemented application behaviour."
+      },
+      "location_points": [
+        {
+          "timestamp": "2026-09-01T09:00:00Z",
+          "latitude": 0.01,
+          "longitude": 0.01,
+          "speed_kmh": 0.0,
+          "accuracy_m": 7,
+          "location_fix": "gnss",
+          "received_at": "2026-09-01T09:00:00Z",
+          "note": "ride start at synthetic pickup point"
+        },
+        {
+          "timestamp": "2026-09-01T09:00:30Z",
+          "latitude": 0.01003,
+          "longitude": 0.012,
+          "speed_kmh": 26.7,
+          "accuracy_m": 8,
+          "location_fix": "gnss",
+          "received_at": "2026-09-01T09:00:30Z"
+        },
+        {
+          "timestamp": "2026-09-01T09:01:00Z",
+          "latitude": 0.00997,
+          "longitude": 0.014,
+          "speed_kmh": 26.7,
+          "accuracy_m": 6,
+          "location_fix": "gnss",
+          "received_at": "2026-09-01T09:01:00Z"
+        },
+        {
+          "timestamp": "2026-09-01T09:01:30Z",
+          "latitude": 0.01002,
+          "longitude": 0.016,
+          "speed_kmh": 26.7,
+          "accuracy_m": 7,
+          "location_fix": "gnss",
+          "received_at": "2026-09-01T09:01:30Z"
+        },
+        {
+          "timestamp": "2026-09-01T09:02:00Z",
+          "latitude": 0.01,
+          "longitude": 0.018,
+          "speed_kmh": 26.7,
+          "accuracy_m": 8,
+          "location_fix": "gnss",
+          "received_at": "2026-09-01T09:02:00Z",
+          "note": "passing fictional junction Alpha"
+        },
+        {
+          "timestamp": "2026-09-01T09:02:30Z",
+          "latitude": 0.00998,
+          "longitude": 0.02,
+          "speed_kmh": 26.7,
+          "accuracy_m": 6,
+          "location_fix": "gnss",
+          "received_at": "2026-09-01T09:02:30Z"
+        },
+        {
+          "timestamp": "2026-09-01T09:03:00Z",
+          "latitude": 0.01003,
+          "longitude": 0.022,
+          "speed_kmh": 26.7,
+          "accuracy_m": 7,
+          "location_fix": "gnss",
+          "received_at": "2026-09-01T09:03:00Z"
+        },
+        {
+          "timestamp": "2026-09-01T09:03:30Z",
+          "latitude": 0.01,
+          "longitude": 0.024,
+          "speed_kmh": 26.7,
+          "accuracy_m": 9,
+          "location_fix": "gnss",
+          "received_at": "2026-09-01T09:03:30Z"
+        },
+        {
+          "timestamp": "2026-09-01T09:04:00Z",
+          "latitude": 0.00997,
+          "longitude": 0.026,
+          "speed_kmh": 26.7,
+          "accuracy_m": 7,
+          "location_fix": "gnss",
+          "received_at": "2026-09-01T09:04:00Z"
+        },
+        {
+          "timestamp": "2026-09-01T09:04:30Z",
+          "latitude": 0.01001,
+          "longitude": 0.028,
+          "speed_kmh": 26.7,
+          "accuracy_m": 8,
+          "location_fix": "gnss",
+          "received_at": "2026-09-01T09:04:30Z",
+          "note": "passing fictional junction Beta"
+        },
+        {
+          "timestamp": "2026-09-01T09:05:00Z",
+          "latitude": 0.01,
+          "longitude": 0.03,
+          "speed_kmh": 26.7,
+          "accuracy_m": 7,
+          "location_fix": "gnss",
+          "received_at": "2026-09-01T09:05:00Z",
+          "note": "arrived at synthetic destination point"
+        }
+      ],
+      "descriptive_metrics": {
+        "point_count": 11,
+        "max_off_route_m": 3,
+        "off_route_duration_s": 0,
+        "max_stationary_duration_s": 0,
+        "accuracy_m_min": 6,
+        "accuracy_m_max": 9,
+        "max_sync_delay_s": 0
+      },
+      "expected_outcome": {
+        "status": "expected_behavior_not_implemented",
+        "event": "no_deviation_event",
+        "workflow_action": "Monitoring continues silently; ride completes; incident timeline records only routine location updates.",
+        "escalation": "none"
+      },
+      "expected_outcome_reason": "All synthetic points stay within the route corridor of the expected route, no sustained deviation occurs and the vehicle never stops, so no deviation or stop signal is expected to fire.",
+      "false_alarm_risk": {
+        "flag": false,
+        "explanation": "Clean baseline ride; no false-alarm risk."
+      },
+      "descriptive_metrics_note": "Computed from this scenario's location_points by the test-data tooling documented in verification.txt. These are properties of the dataset, not detection thresholds."
+    },
+    {
+      "scenario_id": "QRS-002",
+      "scenario_name": "Short legitimate detour around a fictional road closure",
+      "scenario_type": "short_legitimate_detour",
+      "synthetic": true,
+      "synthetic_ride_id": "SYN-RIDE-002",
+      "description": "A synthetic ride that briefly leaves the route corridor to bypass a fictional closure on Synthetic Avenue A, using fictional detour street Beta B, then rejoins the expected route at fictional junction Alpha. Deviation is short-lived and bounded.",
+      "expected_route": {
+        "description": "Expected route R-1 (fictional, synthetic grid): straight synthetic road segment from the synthetic pickup point (0.0100, 0.0100) due east along 'Synthetic Avenue A' through fictional junction Alpha (0.0100, 0.0180) and fictional junction Beta (0.0100, 0.0280) to the synthetic destination point (0.0100, 0.0300). Total expected-route length is about 2.23 km. The road names, junctions, pickup point and destination are invented for this fixture and do not exist.",
+        "waypoints": [
+          {
+            "latitude": 0.01,
+            "longitude": 0.01,
+            "label": "synthetic pickup point (Grid Square 1)"
+          },
+          {
+            "latitude": 0.01,
+            "longitude": 0.018,
+            "label": "fictional junction Alpha"
+          },
+          {
+            "latitude": 0.01,
+            "longitude": 0.028,
+            "label": "fictional junction Beta"
+          },
+          {
+            "latitude": 0.01,
+            "longitude": 0.03,
+            "label": "synthetic destination point (Grid Square 9)"
+          }
+        ]
+      },
+      "scenario_parameters": {
+        "route_corridor_m": 50.0,
+        "grace_period_s": 120,
+        "_parameter_notice": "Illustrative fixture-side test parameters only. README.md describes a configurable route corridor and grace period but the repository implements no detector and no threshold configuration; these values must not be read as implemented application behaviour.",
+        "detour_context": "fictional road closure on Synthetic Avenue A (invented for this fixture)"
+      },
+      "location_points": [
+        {
+          "timestamp": "2026-09-01T09:00:00Z",
+          "latitude": 0.01,
+          "longitude": 0.01,
+          "speed_kmh": 0.0,
+          "accuracy_m": 7,
+          "location_fix": "gnss",
+          "received_at": "2026-09-01T09:00:00Z",
+          "note": "ride start at synthetic pickup point"
+        },
+        {
+          "timestamp": "2026-09-01T09:00:30Z",
+          "latitude": 0.01,
+          "longitude": 0.012,
+          "speed_kmh": 26.7,
+          "accuracy_m": 8,
+          "location_fix": "gnss",
+          "received_at": "2026-09-01T09:00:30Z"
+        },
+        {
+          "timestamp": "2026-09-01T09:01:00Z",
+          "latitude": 0.01002,
+          "longitude": 0.014,
+          "speed_kmh": 26.7,
+          "accuracy_m": 7,
+          "location_fix": "gnss",
+          "received_at": "2026-09-01T09:01:00Z"
+        },
+        {
+          "timestamp": "2026-09-01T09:01:30Z",
+          "latitude": 0.01,
+          "longitude": 0.016,
+          "speed_kmh": 26.7,
+          "accuracy_m": 8,
+          "location_fix": "gnss",
+          "received_at": "2026-09-01T09:01:30Z",
+          "note": "fictional road closure reported ahead on Synthetic Avenue A"
+        },
+        {
+          "timestamp": "2026-09-01T09:02:00Z",
+          "latitude": 0.0115,
+          "longitude": 0.0165,
+          "speed_kmh": 21.1,
+          "accuracy_m": 9,
+          "location_fix": "gnss",
+          "received_at": "2026-09-01T09:02:00Z",
+          "note": "taking fictional detour street Beta B around the closure"
+        },
+        {
+          "timestamp": "2026-09-01T09:02:30Z",
+          "latitude": 0.0122,
+          "longitude": 0.017,
+          "speed_kmh": 11.5,
+          "accuracy_m": 8,
+          "location_fix": "gnss",
+          "received_at": "2026-09-01T09:02:30Z",
+          "note": "furthest point of the fictional detour"
+        },
+        {
+          "timestamp": "2026-09-01T09:03:00Z",
+          "latitude": 0.0115,
+          "longitude": 0.0176,
+          "speed_kmh": 12.3,
+          "accuracy_m": 9,
+          "location_fix": "gnss",
+          "received_at": "2026-09-01T09:03:00Z",
+          "note": "rejoining Synthetic Avenue A"
+        },
+        {
+          "timestamp": "2026-09-01T09:03:30Z",
+          "latitude": 0.01,
+          "longitude": 0.018,
+          "speed_kmh": 20.7,
+          "accuracy_m": 7,
+          "location_fix": "gnss",
+          "received_at": "2026-09-01T09:03:30Z",
+          "note": "back on the expected route at fictional junction Alpha"
+        },
+        {
+          "timestamp": "2026-09-01T09:04:00Z",
+          "latitude": 0.01,
+          "longitude": 0.02,
+          "speed_kmh": 26.7,
+          "accuracy_m": 8,
+          "location_fix": "gnss",
+          "received_at": "2026-09-01T09:04:00Z"
+        },
+        {
+          "timestamp": "2026-09-01T09:04:30Z",
+          "latitude": 0.01002,
+          "longitude": 0.022,
+          "speed_kmh": 26.7,
+          "accuracy_m": 7,
+          "location_fix": "gnss",
+          "received_at": "2026-09-01T09:04:30Z"
+        },
+        {
+          "timestamp": "2026-09-01T09:05:00Z",
+          "latitude": 0.01,
+          "longitude": 0.024,
+          "speed_kmh": 26.7,
+          "accuracy_m": 8,
+          "location_fix": "gnss",
+          "received_at": "2026-09-01T09:05:00Z"
+        },
+        {
+          "timestamp": "2026-09-01T09:05:30Z",
+          "latitude": 0.00998,
+          "longitude": 0.026,
+          "speed_kmh": 26.7,
+          "accuracy_m": 7,
+          "location_fix": "gnss",
+          "received_at": "2026-09-01T09:05:30Z"
+        },
+        {
+          "timestamp": "2026-09-01T09:06:00Z",
+          "latitude": 0.01,
+          "longitude": 0.028,
+          "speed_kmh": 26.7,
+          "accuracy_m": 8,
+          "location_fix": "gnss",
+          "received_at": "2026-09-01T09:06:00Z",
+          "note": "passing fictional junction Beta"
+        },
+        {
+          "timestamp": "2026-09-01T09:06:30Z",
+          "latitude": 0.01,
+          "longitude": 0.03,
+          "speed_kmh": 26.7,
+          "accuracy_m": 7,
+          "location_fix": "gnss",
+          "received_at": "2026-09-01T09:06:30Z",
+          "note": "arrived at synthetic destination point"
+        }
+      ],
+      "descriptive_metrics": {
+        "point_count": 14,
+        "max_off_route_m": 243,
+        "off_route_duration_s": 90,
+        "max_stationary_duration_s": 0,
+        "accuracy_m_min": 7,
+        "accuracy_m_max": 9,
+        "max_sync_delay_s": 0
+      },
+      "expected_outcome": {
+        "status": "expected_behavior_not_implemented",
+        "event": "deviation_candidate_not_escalated",
+        "workflow_action": "Grace period elapses and route re-evaluation recognises a plausible short detour; monitoring continues and the incident timeline records a low-severity deviation note; no safety verification request is sent.",
+        "escalation": "none"
+      },
+      "expected_outcome_reason": "The vehicle leaves the corridor only briefly (well under the grace period), stays within a few hundred metres of the expected route and rejoins it, which matches the documented 'valid alternative route -> continue monitoring' branch and the documented fact that road closures cause legitimate route changes.",
+      "false_alarm_risk": {
+        "flag": false,
+        "explanation": "Low false-alarm risk if the grace period and route re-evaluation behave as documented; escalating here would itself be a false alarm."
+      },
+      "descriptive_metrics_note": "Computed from this scenario's location_points by the test-data tooling documented in verification.txt. These are properties of the dataset, not detection thresholds."
+    },
+    {
+      "scenario_id": "QRS-003",
+      "scenario_name": "Sustained route deviation away from the expected route",
+      "scenario_type": "sustained_deviation",
+      "synthetic": true,
+      "synthetic_ride_id": "SYN-RIDE-003",
+      "description": "A synthetic ride that leaves the expected route after 90 seconds and keeps driving away into the fictional Industrial Grid Zone for several minutes without rejoining, with off-route distance steadily increasing.",
+      "expected_route": {
+        "description": "Expected route R-1 (fictional, synthetic grid): straight synthetic road segment from the synthetic pickup point (0.0100, 0.0100) due east along 'Synthetic Avenue A' through fictional junction Alpha (0.0100, 0.0180) and fictional junction Beta (0.0100, 0.0280) to the synthetic destination point (0.0100, 0.0300). Total expected-route length is about 2.23 km. The road names, junctions, pickup point and destination are invented for this fixture and do not exist.",
+        "waypoints": [
+          {
+            "latitude": 0.01,
+            "longitude": 0.01,
+            "label": "synthetic pickup point (Grid Square 1)"
+          },
+          {
+            "latitude": 0.01,
+            "longitude": 0.018,
+            "label": "fictional junction Alpha"
+          },
+          {
+            "latitude": 0.01,
+            "longitude": 0.028,
+            "label": "fictional junction Beta"
+          },
+          {
+            "latitude": 0.01,
+            "longitude": 0.03,
+            "label": "synthetic destination point (Grid Square 9)"
+          }
+        ]
+      },
+      "scenario_parameters": {
+        "route_corridor_m": 50.0,
+        "grace_period_s": 120,
+        "_parameter_notice": "Illustrative fixture-side test parameters only. README.md describes a configurable route corridor and grace period but the repository implements no detector and no threshold configuration; these values must not be read as implemented application behaviour."
+      },
+      "location_points": [
+        {
+          "timestamp": "2026-09-01T09:00:00Z",
+          "latitude": 0.01,
+          "longitude": 0.01,
+          "speed_kmh": 0.0,
+          "accuracy_m": 7,
+          "location_fix": "gnss",
+          "received_at": "2026-09-01T09:00:00Z",
+          "note": "ride start at synthetic pickup point"
+        },
+        {
+          "timestamp": "2026-09-01T09:00:30Z",
+          "latitude": 0.01,
+          "longitude": 0.012,
+          "speed_kmh": 26.7,
+          "accuracy_m": 8,
+          "location_fix": "gnss",
+          "received_at": "2026-09-01T09:00:30Z"
+        },
+        {
+          "timestamp": "2026-09-01T09:01:00Z",
+          "latitude": 0.01,
+          "longitude": 0.014,
+          "speed_kmh": 26.7,
+          "accuracy_m": 7,
+          "location_fix": "gnss",
+          "received_at": "2026-09-01T09:01:00Z",
+          "note": "last point on the expected route"
+        },
+        {
+          "timestamp": "2026-09-01T09:01:30Z",
+          "latitude": 0.0112,
+          "longitude": 0.0135,
+          "speed_kmh": 17.3,
+          "accuracy_m": 8,
+          "location_fix": "gnss",
+          "received_at": "2026-09-01T09:01:30Z",
+          "note": "turning off Synthetic Avenue A into fictional Industrial Grid Zone"
+        },
+        {
+          "timestamp": "2026-09-01T09:02:00Z",
+          "latitude": 0.0128,
+          "longitude": 0.0128,
+          "speed_kmh": 23.3,
+          "accuracy_m": 7,
+          "location_fix": "gnss",
+          "received_at": "2026-09-01T09:02:00Z"
+        },
+        {
+          "timestamp": "2026-09-01T09:02:30Z",
+          "latitude": 0.0145,
+          "longitude": 0.012,
+          "speed_kmh": 25.1,
+          "accuracy_m": 8,
+          "location_fix": "gnss",
+          "received_at": "2026-09-01T09:02:30Z"
+        },
+        {
+          "timestamp": "2026-09-01T09:03:00Z",
+          "latitude": 0.0162,
+          "longitude": 0.0112,
+          "speed_kmh": 25.1,
+          "accuracy_m": 7,
+          "location_fix": "gnss",
+          "received_at": "2026-09-01T09:03:00Z"
+        },
+        {
+          "timestamp": "2026-09-01T09:04:00Z",
+          "latitude": 0.0185,
+          "longitude": 0.0104,
+          "speed_kmh": 16.2,
+          "accuracy_m": 8,
+          "location_fix": "gnss",
+          "received_at": "2026-09-01T09:04:00Z"
+        },
+        {
+          "timestamp": "2026-09-01T09:05:00Z",
+          "latitude": 0.021,
+          "longitude": 0.0096,
+          "speed_kmh": 17.5,
+          "accuracy_m": 7,
+          "location_fix": "gnss",
+          "received_at": "2026-09-01T09:05:00Z"
+        },
+        {
+          "timestamp": "2026-09-01T09:06:00Z",
+          "latitude": 0.0232,
+          "longitude": 0.0088,
+          "speed_kmh": 15.6,
+          "accuracy_m": 8,
+          "location_fix": "gnss",
+          "received_at": "2026-09-01T09:06:00Z"
+        },
+        {
+          "timestamp": "2026-09-01T09:07:00Z",
+          "latitude": 0.0255,
+          "longitude": 0.008,
+          "speed_kmh": 16.2,
+          "accuracy_m": 7,
+          "location_fix": "gnss",
+          "received_at": "2026-09-01T09:07:00Z"
+        },
+        {
+          "timestamp": "2026-09-01T09:08:00Z",
+          "latitude": 0.027,
+          "longitude": 0.0072,
+          "speed_kmh": 11.3,
+          "accuracy_m": 8,
+          "location_fix": "gnss",
+          "received_at": "2026-09-01T09:08:00Z",
+          "note": "still off route, moving away from the expected route"
+        }
+      ],
+      "descriptive_metrics": {
+        "point_count": 12,
+        "max_off_route_m": 1905,
+        "off_route_duration_s": 390,
+        "max_stationary_duration_s": 0,
+        "accuracy_m_min": 7,
+        "accuracy_m_max": 8,
+        "max_sync_delay_s": 0
+      },
+      "expected_outcome": {
+        "status": "expected_behavior_not_implemented",
+        "event": "safety_verification_request",
+        "workflow_action": "After the grace period, route re-evaluation finds no valid alternative route, so a safety verification request is sent to the passenger; if no confirmation is received, the staged escalation workflow notifies the trusted contact per policy.",
+        "escalation": "staged_escalation_to_trusted_contact_if_no_passenger_response"
+      },
+      "expected_outcome_reason": "The deviation is sustained well beyond the grace period, grows towards roughly 1.9 km from the expected route and never rejoins it, so it is no longer explainable as an ordinary detour; the documented workflow calls for verification rather than an automatic assumption of danger.",
+      "false_alarm_risk": {
+        "flag": false,
+        "explanation": "This is the intended true-positive case; a system that stays silent here would be a miss, not a false alarm."
+      },
+      "descriptive_metrics_note": "Computed from this scenario's location_points by the test-data tooling documented in verification.txt. These are properties of the dataset, not detection thresholds."
+    },
+    {
+      "scenario_id": "QRS-004",
+      "scenario_name": "Unusually long stationary stop mid-route",
+      "scenario_type": "unusual_long_stop",
+      "synthetic": true,
+      "synthetic_ride_id": "SYN-RIDE-004",
+      "description": "A synthetic ride that follows the expected route, stops motionless in fictional side street Gamma C for 12 minutes mid-route (far from pickup and destination), then resumes and completes the ride.",
+      "expected_route": {
+        "description": "Expected route R-1 (fictional, synthetic grid): straight synthetic road segment from the synthetic pickup point (0.0100, 0.0100) due east along 'Synthetic Avenue A' through fictional junction Alpha (0.0100, 0.0180) and fictional junction Beta (0.0100, 0.0280) to the synthetic destination point (0.0100, 0.0300). Total expected-route length is about 2.23 km. The road names, junctions, pickup point and destination are invented for this fixture and do not exist.",
+        "waypoints": [
+          {
+            "latitude": 0.01,
+            "longitude": 0.01,
+            "label": "synthetic pickup point (Grid Square 1)"
+          },
+          {
+            "latitude": 0.01,
+            "longitude": 0.018,
+            "label": "fictional junction Alpha"
+          },
+          {
+            "latitude": 0.01,
+            "longitude": 0.028,
+            "label": "fictional junction Beta"
+          },
+          {
+            "latitude": 0.01,
+            "longitude": 0.03,
+            "label": "synthetic destination point (Grid Square 9)"
+          }
+        ]
+      },
+      "scenario_parameters": {
+        "route_corridor_m": 50.0,
+        "grace_period_s": 120,
+        "_parameter_notice": "Illustrative fixture-side test parameters only. README.md describes a configurable route corridor and grace period but the repository implements no detector and no threshold configuration; these values must not be read as implemented application behaviour.",
+        "illustrative_stop_duration_s": 600
+      },
+      "location_points": [
+        {
+          "timestamp": "2026-09-01T09:00:00Z",
+          "latitude": 0.01,
+          "longitude": 0.01,
+          "speed_kmh": 0.0,
+          "accuracy_m": 7,
+          "location_fix": "gnss",
+          "received_at": "2026-09-01T09:00:00Z",
+          "note": "ride start at synthetic pickup point"
+        },
+        {
+          "timestamp": "2026-09-01T09:00:30Z",
+          "latitude": 0.01,
+          "longitude": 0.012,
+          "speed_kmh": 26.7,
+          "accuracy_m": 8,
+          "location_fix": "gnss",
+          "received_at": "2026-09-01T09:00:30Z"
+        },
+        {
+          "timestamp": "2026-09-01T09:01:00Z",
+          "latitude": 0.01002,
+          "longitude": 0.014,
+          "speed_kmh": 26.7,
+          "accuracy_m": 7,
+          "location_fix": "gnss",
+          "received_at": "2026-09-01T09:01:00Z"
+        },
+        {
+          "timestamp": "2026-09-01T09:01:30Z",
+          "latitude": 0.01,
+          "longitude": 0.016,
+          "speed_kmh": 26.7,
+          "accuracy_m": 8,
+          "location_fix": "gnss",
+          "received_at": "2026-09-01T09:01:30Z"
+        },
+        {
+          "timestamp": "2026-09-01T09:02:00Z",
+          "latitude": 0.01,
+          "longitude": 0.018,
+          "speed_kmh": 26.7,
+          "accuracy_m": 7,
+          "location_fix": "gnss",
+          "received_at": "2026-09-01T09:02:00Z",
+          "note": "vehicle stops in fictional side street Gamma C; ride start of stop window"
+        },
+        {
+          "timestamp": "2026-09-01T09:02:30Z",
+          "latitude": 0.01,
+          "longitude": 0.018,
+          "speed_kmh": 0.0,
+          "accuracy_m": 8,
+          "location_fix": "gnss",
+          "received_at": "2026-09-01T09:02:30Z",
+          "note": "stationary synthetic point (speed 0)"
+        },
+        {
+          "timestamp": "2026-09-01T09:03:00Z",
+          "latitude": 0.01,
+          "longitude": 0.018,
+          "speed_kmh": 0.0,
+          "accuracy_m": 8,
+          "location_fix": "gnss",
+          "received_at": "2026-09-01T09:03:00Z",
+          "note": "stationary synthetic point (speed 0)"
+        },
+        {
+          "timestamp": "2026-09-01T09:03:30Z",
+          "latitude": 0.01,
+          "longitude": 0.018,
+          "speed_kmh": 0.0,
+          "accuracy_m": 8,
+          "location_fix": "gnss",
+          "received_at": "2026-09-01T09:03:30Z",
+          "note": "stationary synthetic point (speed 0)"
+        },
+        {
+          "timestamp": "2026-09-01T09:04:00Z",
+          "latitude": 0.01,
+          "longitude": 0.018,
+          "speed_kmh": 0.0,
+          "accuracy_m": 8,
+          "location_fix": "gnss",
+          "received_at": "2026-09-01T09:04:00Z",
+          "note": "stationary synthetic point (speed 0)"
+        },
+        {
+          "timestamp": "2026-09-01T09:04:30Z",
+          "latitude": 0.01,
+          "longitude": 0.018,
+          "speed_kmh": 0.0,
+          "accuracy_m": 8,
+          "location_fix": "gnss",
+          "received_at": "2026-09-01T09:04:30Z",
+          "note": "stationary synthetic point (speed 0)"
+        },
+        {
+          "timestamp": "2026-09-01T09:05:00Z",
+          "latitude": 0.01,
+          "longitude": 0.018,
+          "speed_kmh": 0.0,
+          "accuracy_m": 8,
+          "location_fix": "gnss",
+          "received_at": "2026-09-01T09:05:00Z",
+          "note": "stationary synthetic point (speed 0)"
+        },
+        {
+          "timestamp": "2026-09-01T09:05:30Z",
+          "latitude": 0.01,
+          "longitude": 0.018,
+          "speed_kmh": 0.0,
+          "accuracy_m": 8,
+          "location_fix": "gnss",
+          "received_at": "2026-09-01T09:05:30Z",
+          "note": "stationary synthetic point (speed 0)"
+        },
+        {
+          "timestamp": "2026-09-01T09:06:00Z",
+          "latitude": 0.01,
+          "longitude": 0.018,
+          "speed_kmh": 0.0,
+          "accuracy_m": 8,
+          "location_fix": "gnss",
+          "received_at": "2026-09-01T09:06:00Z",
+          "note": "stationary synthetic point (speed 0)"
+        },
+        {
+          "timestamp": "2026-09-01T09:06:30Z",
+          "latitude": 0.01,
+          "longitude": 0.018,
+          "speed_kmh": 0.0,
+          "accuracy_m": 8,
+          "location_fix": "gnss",
+          "received_at": "2026-09-01T09:06:30Z",
+          "note": "stationary synthetic point (speed 0)"
+        },
+        {
+          "timestamp": "2026-09-01T09:07:00Z",
+          "latitude": 0.01,
+          "longitude": 0.018,
+          "speed_kmh": 0.0,
+          "accuracy_m": 8,
+          "location_fix": "gnss",
+          "received_at": "2026-09-01T09:07:00Z",
+          "note": "stationary synthetic point (speed 0)"
+        },
+        {
+          "timestamp": "2026-09-01T09:07:30Z",
+          "latitude": 0.01,
+          "longitude": 0.018,
+          "speed_kmh": 0.0,
+          "accuracy_m": 8,
+          "location_fix": "gnss",
+          "received_at": "2026-09-01T09:07:30Z",
+          "note": "stationary synthetic point (speed 0)"
+        },
+        {
+          "timestamp": "2026-09-01T09:08:00Z",
+          "latitude": 0.01,
+          "longitude": 0.018,
+          "speed_kmh": 0.0,
+          "accuracy_m": 8,
+          "location_fix": "gnss",
+          "received_at": "2026-09-01T09:08:00Z",
+          "note": "stationary synthetic point (speed 0)"
+        },
+        {
+          "timestamp": "2026-09-01T09:08:30Z",
+          "latitude": 0.01,
+          "longitude": 0.018,
+          "speed_kmh": 0.0,
+          "accuracy_m": 8,
+          "location_fix": "gnss",
+          "received_at": "2026-09-01T09:08:30Z",
+          "note": "stationary synthetic point (speed 0)"
+        },
+        {
+          "timestamp": "2026-09-01T09:09:00Z",
+          "latitude": 0.01,
+          "longitude": 0.018,
+          "speed_kmh": 0.0,
+          "accuracy_m": 8,
+          "location_fix": "gnss",
+          "received_at": "2026-09-01T09:09:00Z",
+          "note": "stationary synthetic point (speed 0)"
+        },
+        {
+          "timestamp": "2026-09-01T09:09:30Z",
+          "latitude": 0.01,
+          "longitude": 0.018,
+          "speed_kmh": 0.0,
+          "accuracy_m": 8,
+          "location_fix": "gnss",
+          "received_at": "2026-09-01T09:09:30Z",
+          "note": "stationary synthetic point (speed 0)"
+        },
+        {
+          "timestamp": "2026-09-01T09:10:00Z",
+          "latitude": 0.01,
+          "longitude": 0.018,
+          "speed_kmh": 0.0,
+          "accuracy_m": 8,
+          "location_fix": "gnss",
+          "received_at": "2026-09-01T09:10:00Z",
+          "note": "stationary synthetic point (speed 0)"
+        },
+        {
+          "timestamp": "2026-09-01T09:10:30Z",
+          "latitude": 0.01,
+          "longitude": 0.018,
+          "speed_kmh": 0.0,
+          "accuracy_m": 8,
+          "location_fix": "gnss",
+          "received_at": "2026-09-01T09:10:30Z",
+          "note": "stationary synthetic point (speed 0)"
+        },
+        {
+          "timestamp": "2026-09-01T09:11:00Z",
+          "latitude": 0.01,
+          "longitude": 0.018,
+          "speed_kmh": 0.0,
+          "accuracy_m": 8,
+          "location_fix": "gnss",
+          "received_at": "2026-09-01T09:11:00Z",
+          "note": "stationary synthetic point (speed 0)"
+        },
+        {
+          "timestamp": "2026-09-01T09:11:30Z",
+          "latitude": 0.01,
+          "longitude": 0.018,
+          "speed_kmh": 0.0,
+          "accuracy_m": 8,
+          "location_fix": "gnss",
+          "received_at": "2026-09-01T09:11:30Z",
+          "note": "stationary synthetic point (speed 0)"
+        },
+        {
+          "timestamp": "2026-09-01T09:12:00Z",
+          "latitude": 0.01,
+          "longitude": 0.018,
+          "speed_kmh": 0.0,
+          "accuracy_m": 8,
+          "location_fix": "gnss",
+          "received_at": "2026-09-01T09:12:00Z",
+          "note": "stationary synthetic point (speed 0)"
+        },
+        {
+          "timestamp": "2026-09-01T09:12:30Z",
+          "latitude": 0.01,
+          "longitude": 0.018,
+          "speed_kmh": 0.0,
+          "accuracy_m": 8,
+          "location_fix": "gnss",
+          "received_at": "2026-09-01T09:12:30Z",
+          "note": "stationary synthetic point (speed 0)"
+        },
+        {
+          "timestamp": "2026-09-01T09:13:00Z",
+          "latitude": 0.01,
+          "longitude": 0.018,
+          "speed_kmh": 0.0,
+          "accuracy_m": 8,
+          "location_fix": "gnss",
+          "received_at": "2026-09-01T09:13:00Z",
+          "note": "stationary synthetic point (speed 0)"
+        },
+        {
+          "timestamp": "2026-09-01T09:13:30Z",
+          "latitude": 0.01,
+          "longitude": 0.018,
+          "speed_kmh": 0.0,
+          "accuracy_m": 8,
+          "location_fix": "gnss",
+          "received_at": "2026-09-01T09:13:30Z",
+          "note": "stationary synthetic point (speed 0)"
+        },
+        {
+          "timestamp": "2026-09-01T09:14:00Z",
+          "latitude": 0.01,
+          "longitude": 0.018,
+          "speed_kmh": 0.0,
+          "accuracy_m": 7,
+          "location_fix": "gnss",
+          "received_at": "2026-09-01T09:14:00Z",
+          "note": "end of stop window; passenger confirmation would be requested by then"
+        },
+        {
+          "timestamp": "2026-09-01T09:14:30Z",
+          "latitude": 0.01,
+          "longitude": 0.02,
+          "speed_kmh": 26.7,
+          "accuracy_m": 8,
+          "location_fix": "gnss",
+          "received_at": "2026-09-01T09:14:30Z",
+          "note": "ride resumes on the expected route"
+        },
+        {
+          "timestamp": "2026-09-01T09:15:00Z",
+          "latitude": 0.01,
+          "longitude": 0.022,
+          "speed_kmh": 26.7,
+          "accuracy_m": 7,
+          "location_fix": "gnss",
+          "received_at": "2026-09-01T09:15:00Z"
+        },
+        {
+          "timestamp": "2026-09-01T09:15:30Z",
+          "latitude": 0.01002,
+          "longitude": 0.024,
+          "speed_kmh": 26.7,
+          "accuracy_m": 8,
+          "location_fix": "gnss",
+          "received_at": "2026-09-01T09:15:30Z"
+        },
+        {
+          "timestamp": "2026-09-01T09:16:00Z",
+          "latitude": 0.01,
+          "longitude": 0.026,
+          "speed_kmh": 26.7,
+          "accuracy_m": 7,
+          "location_fix": "gnss",
+          "received_at": "2026-09-01T09:16:00Z"
+        },
+        {
+          "timestamp": "2026-09-01T09:16:30Z",
+          "latitude": 0.01,
+          "longitude": 0.028,
+          "speed_kmh": 26.7,
+          "accuracy_m": 8,
+          "location_fix": "gnss",
+          "received_at": "2026-09-01T09:16:30Z",
+          "note": "passing fictional junction Beta"
+        },
+        {
+          "timestamp": "2026-09-01T09:17:00Z",
+          "latitude": 0.01,
+          "longitude": 0.03,
+          "speed_kmh": 26.7,
+          "accuracy_m": 7,
+          "location_fix": "gnss",
+          "received_at": "2026-09-01T09:17:00Z",
+          "note": "arrived at synthetic destination point"
+        }
+      ],
+      "descriptive_metrics": {
+        "point_count": 35,
+        "max_off_route_m": 2,
+        "off_route_duration_s": 0,
+        "max_stationary_duration_s": 720,
+        "accuracy_m_min": 7,
+        "accuracy_m_max": 8,
+        "max_sync_delay_s": 0
+      },
+      "expected_outcome": {
+        "status": "expected_behavior_not_implemented",
+        "event": "unusual_stop_verification_request",
+        "workflow_action": "The stop-duration signal (vehicle stopping time is a documented multi-signal input) triggers a safety verification request while the vehicle is stationary; if the passenger confirms safe, the event is closed and monitoring continues; if there is no response, staged escalation to the trusted contact applies.",
+        "escalation": "staged_escalation_to_trusted_contact_if_no_passenger_response"
+      },
+      "expected_outcome_reason": "The vehicle is stationary at one synthetic location for 720 seconds mid-route, far from both the pickup point and the destination, which is the 'vehicle stops for an unusual period' case named in the project README; a passenger confirmation step is expected before any escalation because a stop alone does not prove danger.",
+      "false_alarm_risk": {
+        "flag": false,
+        "explanation": "Expected true-positive for the stop signal; note that ordinary long stops (fuel, traffic jam, passenger request) exist in reality, which is why passenger confirmation is the expected first step rather than automatic escalation."
+      },
+      "descriptive_metrics_note": "Computed from this scenario's location_points by the test-data tooling documented in verification.txt. These are properties of the dataset, not detection thresholds."
+    },
+    {
+      "scenario_id": "QRS-005",
+      "scenario_name": "Weak GPS and network conditions with false-alarm risk",
+      "scenario_type": "weak_signal_false_alarm_risk",
+      "synthetic": true,
+      "synthetic_ride_id": "SYN-RIDE-005",
+      "description": "A synthetic ride whose reported fixes degrade badly: horizontal accuracy of 85-140 metres, jitter, reporting gaps of 60-90 seconds, delayed synchronisation and two stale last-known-location replays. Naive point-to-corridor comparison would report the vehicle off route even though the ride follows the expected route the whole time.",
+      "expected_route": {
+        "description": "Expected route R-1 (fictional, synthetic grid): straight synthetic road segment from the synthetic pickup point (0.0100, 0.0100) due east along 'Synthetic Avenue A' through fictional junction Alpha (0.0100, 0.0180) and fictional junction Beta (0.0100, 0.0280) to the synthetic destination point (0.0100, 0.0300). Total expected-route length is about 2.23 km. The road names, junctions, pickup point and destination are invented for this fixture and do not exist.",
+        "waypoints": [
+          {
+            "latitude": 0.01,
+            "longitude": 0.01,
+            "label": "synthetic pickup point (Grid Square 1)"
+          },
+          {
+            "latitude": 0.01,
+            "longitude": 0.018,
+            "label": "fictional junction Alpha"
+          },
+          {
+            "latitude": 0.01,
+            "longitude": 0.028,
+            "label": "fictional junction Beta"
+          },
+          {
+            "latitude": 0.01,
+            "longitude": 0.03,
+            "label": "synthetic destination point (Grid Square 9)"
+          }
+        ]
+      },
+      "scenario_parameters": {
+        "route_corridor_m": 50.0,
+        "grace_period_s": 120,
+        "_parameter_notice": "Illustrative fixture-side test parameters only. README.md describes a configurable route corridor and grace period but the repository implements no detector and no threshold configuration; these values must not be read as implemented application behaviour.",
+        "signal_conditions": "simulated weak GNSS/network multipath with delayed synchronisation"
+      },
+      "location_points": [
+        {
+          "timestamp": "2026-09-01T09:00:00Z",
+          "latitude": 0.01,
+          "longitude": 0.01,
+          "speed_kmh": 0.0,
+          "accuracy_m": 15,
+          "location_fix": "gnss",
+          "received_at": "2026-09-01T09:00:45Z",
+          "note": "ride start at synthetic pickup point; signal still good"
+        },
+        {
+          "timestamp": "2026-09-01T09:01:00Z",
+          "latitude": 0.0111,
+          "longitude": 0.013,
+          "speed_kmh": 21.3,
+          "accuracy_m": 95,
+          "location_fix": "network_approx",
+          "received_at": "2026-09-01T09:01:50Z",
+          "note": "urban-grid multipath simulation begins; fix quality degrades"
+        },
+        {
+          "timestamp": "2026-09-01T09:02:30Z",
+          "latitude": 0.0087,
+          "longitude": 0.016,
+          "speed_kmh": 17.1,
+          "accuracy_m": 130,
+          "location_fix": "network_approx",
+          "received_at": "2026-09-01T09:03:30Z",
+          "note": "jittered fix; apparent position is off route but inside its own accuracy radius"
+        },
+        {
+          "timestamp": "2026-09-01T09:04:00Z",
+          "latitude": 0.0116,
+          "longitude": 0.019,
+          "speed_kmh": 18.6,
+          "accuracy_m": 120,
+          "location_fix": "last_known_location",
+          "received_at": "2026-09-01T09:05:15Z",
+          "note": "stale last-known-location replayed after a reporting gap"
+        },
+        {
+          "timestamp": "2026-09-01T09:05:30Z",
+          "latitude": 0.0102,
+          "longitude": 0.0215,
+          "speed_kmh": 12.7,
+          "accuracy_m": 85,
+          "location_fix": "network_approx",
+          "received_at": "2026-09-01T09:06:20Z"
+        },
+        {
+          "timestamp": "2026-09-01T09:07:00Z",
+          "latitude": 0.0113,
+          "longitude": 0.024,
+          "speed_kmh": 12.1,
+          "accuracy_m": 140,
+          "location_fix": "last_known_location",
+          "received_at": "2026-09-01T09:08:20Z",
+          "note": "second stale replay; delayed synchronisation"
+        },
+        {
+          "timestamp": "2026-09-01T09:08:30Z",
+          "latitude": 0.01,
+          "longitude": 0.027,
+          "speed_kmh": 14.5,
+          "accuracy_m": 40,
+          "location_fix": "gnss",
+          "received_at": "2026-09-01T09:09:15Z",
+          "note": "signal quality recovering"
+        },
+        {
+          "timestamp": "2026-09-01T09:09:00Z",
+          "latitude": 0.01,
+          "longitude": 0.03,
+          "speed_kmh": 40.0,
+          "accuracy_m": 12,
+          "location_fix": "gnss",
+          "received_at": "2026-09-01T09:09:20Z",
+          "note": "arrived at synthetic destination point with a good fix"
+        }
+      ],
+      "descriptive_metrics": {
+        "point_count": 8,
+        "max_off_route_m": 177,
+        "off_route_duration_s": 270,
+        "max_stationary_duration_s": 0,
+        "accuracy_m_min": 12,
+        "accuracy_m_max": 140,
+        "max_sync_delay_s": 80
+      },
+      "expected_outcome": {
+        "status": "expected_behavior_not_implemented",
+        "event": "no_deviation_event_signal_degraded",
+        "workflow_action": "Low-quality and stale points are treated as inconclusive: last-known-location handling and delayed synchronisation apply, no deviation alert is raised during the degraded-signal window, and the incident timeline records degraded signal quality. A deviation alert would only be expected if a credible, sustained off-route pattern remained after signal quality recovered.",
+        "escalation": "none"
+      },
+      "expected_outcome_reason": "Every apparent corridor exit happens while the point's own reported accuracy radius is larger than its distance from the expected route, so the deviation is not distinguishable from GPS noise; the README explicitly warns that GPS inaccuracy near obstacles causes false deviations and requires a low false-alarm rate, so suppressing escalation is the expected outcome.",
+      "false_alarm_risk": {
+        "flag": true,
+        "explanation": "This scenario exists specifically to demonstrate the false-alarm risk: a fixed-distance corridor check without accuracy and staleness handling would raise a false deviation on every degraded point."
+      },
+      "descriptive_metrics_note": "Computed from this scenario's location_points by the test-data tooling documented in verification.txt. These are properties of the dataset, not detection thresholds."
+    }
+  ]
+}
